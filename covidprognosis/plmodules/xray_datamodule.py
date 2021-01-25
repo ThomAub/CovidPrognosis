@@ -84,6 +84,14 @@ def fetch_dataset(
             transform=transform,
             label_list=label_list,
         )
+    elif dataset_name == "ranzcr":
+        assert not isinstance(dataset_dir, list)
+        dataset = cp.data.RANZRCDataset(
+            directory=dataset_dir,
+            split=split,
+            transform=transform,
+            label_list=label_list,
+        )
     elif dataset_name == "mimic-chexpert":
         assert isinstance(dataset_dir, list)
         dataset = cp.data.CombinedXrayDataset(

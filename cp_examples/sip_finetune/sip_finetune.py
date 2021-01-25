@@ -91,7 +91,9 @@ class SipModule(pl.LightningModule):
                 self.pretrained_file = Path.cwd() / pretrained_file.split("/")[-1]
                 download_model(url, self.pretrained_file)
 
-            pretrained_dict = torch.load(self.pretrained_file)["state_dict"]
+            pretrained_dict = torch.load(
+                self.pretrained_file, map_location=torch.device("cpu")
+            )["state_dict"]
             state_dict = {}
             for k, v in pretrained_dict.items():
                 if k.startswith("model.encoder_q."):

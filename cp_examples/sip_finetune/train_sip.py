@@ -24,7 +24,7 @@ from covidprognosis.data.transforms import (
 from covidprognosis.plmodules import XrayDataModule
 from torchvision import transforms
 
-from sip_finetune import SipModule
+from cp_examples.sip_finetune.sip_finetune import SipModule
 
 
 def build_args(arg_defaults=None):
@@ -93,6 +93,20 @@ def build_args(arg_defaults=None):
             "Consolidation",
             "Edema",
             "Effusion",
+        ]
+    elif args.dataset_name == "ranzcr":
+        args.val_pathology_list = [
+            "ETT - Abnormal",  # endotracheal tube placement abnormal
+            "ETT - Borderline",  # endotracheal tube placement borderline abnormal
+            "ETT - Normal",  # endotracheal tube placement normal
+            "NGT - Abnormal",  # nasogastric tube placement abnormal
+            "NGT - Borderline",  # nasogastric tube placement borderline abnormal
+            "NGT - Incompletely Imaged",  # nasogastric tube placement inconclusive due to imaging
+            "NGT - Normal",  # nasogastric tube placement borderline normal
+            "CVC - Abnormal",  # central venous catheter placement abnormal
+            "CVC - Borderline",  # central venous catheter placement borderline abnormal
+            "CVC - Normal",  # central venous catheter placement normal
+            "Swan Ganz Catheter Present",  # TODO: ??
         ]
     else:
         raise ValueError("Unrecognized dataset.")
