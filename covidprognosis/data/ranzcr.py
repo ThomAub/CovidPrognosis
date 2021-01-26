@@ -77,7 +77,7 @@ class RANZRCDataset(BaseDataset):
             train_count = int(np.round(resplit_ratios[0] * len(patient_list)))
             val_count = int(np.round(resplit_ratios[1] * len(patient_list)))
 
-            grouped = csv.groupby("Patient ID")
+            grouped = csv.groupby("PatientID")
 
             if self.split == "train":
                 patient_list = patient_list[rand_inds[:train_count]]

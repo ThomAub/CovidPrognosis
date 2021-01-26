@@ -26,6 +26,8 @@ from torchvision import transforms
 
 from cp_examples.sip_finetune.sip_finetune import SipModule
 
+import warnings
+warnings.filterwarnings("ignore")
 
 def build_args(arg_defaults=None):
     pl.seed_everything(1234)
@@ -123,7 +125,9 @@ def build_args(arg_defaults=None):
             args.resume_from_checkpoint = str(ckpt_list[-1])
 
     args.callbacks.append(
-        pl.callbacks.ModelCheckpoint(dirpath=checkpoint_dir, verbose=True)
+        pl.callbacks.ModelCheckpoint(monitor="val_metrics/loss", mode="min", save_top_k=5, dirpath=checkpoint_dir, verbose=True))
+    args.callbacks.append(
+        pl.callbacks.LearningRateMonitor(logging_interval='step')
     )
 
     return args

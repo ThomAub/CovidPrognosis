@@ -89,6 +89,7 @@ def fetch_dataset(
         dataset = cp.data.RANZRCDataset(
             directory=dataset_dir,
             split=split,
+            resplit=True,
             transform=transform,
             label_list=label_list,
         )
